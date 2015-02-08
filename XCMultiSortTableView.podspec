@@ -5,13 +5,11 @@ Pod::Spec.new do |s|
   s.summary      = "Multi-Columns Table View with freeze column and header like excel view, and click the section header can afresh the sorted data. "
   s.description = "XCMultiSortTableView is a fixed head and sortable columns tableView. please visit the demo XCMultiSortTableView，the core part is the XCMultiSortTableView folder in demo files."
   s.homepage     = "https://github.com/flybluewolf/XCMultiSortTableView"
-  s.author   = { 'kingiol' }
+  s.author   = { 'kingiol' => 'kingxiaokang@gmail.com' }
   s.requires_arc = true
   s.frameworks = 'QuartzCore', 'UIKit', 'CoreGraphics', 'Foundation'
-
   s.platform     = :ios, '7.0'
-  s.ios.deployment_target = '5.0'
-
+  s.source       = { :git => "https://github.com/flybluewolf/XCMultiSortTableView.git"}
   s.source_files  = 'XCMultiTableDemo/XCMultiSortTableView/*'
 
   s.license = {
