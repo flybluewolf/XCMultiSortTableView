@@ -73,67 +73,79 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        self.layer.borderColor = [[UIColor colorWithWhite:XCMultiTableView_BoraerColorGray alpha:1.0f] CGColor];
-        self.layer.cornerRadius = XCMultiTableView_CornerRadius;
-        self.layer.borderWidth = XCMultiTableView_BorderWidth;
-        self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor clearColor];
-        self.contentMode = UIViewContentModeRedraw;
-        
-        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        
-        cellWidth = XCMultiTableView_DefaultCellWidth;
-        cellHeight = XCMultiTableView_DefaultCellHeight;
-        topHeaderHeight = XCMultiTableView_DefaultTopHeaderHeight;
-        leftHeaderWidth = XCMultiTableView_DefaultLeftHeaderWidth;
-        sectionHeaderHeight = XCMultiTableView_DefaultSectionHeaderHeight;
-        
-        boldSeperatorLineWidth = XCMultiTableView_DefaultBoldLineWidth;
-        normalSeperatorLineWidth = XCMultiTableView_DefaultNormalLineWidth;
-        
-        boldSeperatorLineColor = [UIColor colorWithWhite:XCMultiTableView_DefaultLineGray alpha:1.0];
-        normalSeperatorLineColor = [UIColor colorWithWhite:XCMultiTableView_DefaultLineGray alpha:1.0];
-        
-        vertexView = [[UIView alloc] initWithFrame:CGRectZero];
-        vertexView.backgroundColor = [UIColor clearColor];
-        vertexView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self addSubview:vertexView];
-        
-        topHeaderScrollView = [[XCMultiTableViewBGScrollView alloc] initWithFrame:CGRectZero];
-        topHeaderScrollView.backgroundColor = [UIColor clearColor];
-        topHeaderScrollView.parent = self;
-        topHeaderScrollView.delegate = self;
-        topHeaderScrollView.showsHorizontalScrollIndicator = NO;
-        topHeaderScrollView.showsVerticalScrollIndicator = NO;
-        topHeaderScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self addSubview:topHeaderScrollView];
-        
-        leftHeaderTableView = [[UITableView alloc] initWithFrame:CGRectZero];
-        leftHeaderTableView.dataSource = self;
-        leftHeaderTableView.delegate = self;
-        leftHeaderTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        leftHeaderTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        leftHeaderTableView.backgroundColor = [UIColor clearColor];
-        [self addSubview:leftHeaderTableView];
-        
-        contentScrollView = [[XCMultiTableViewBGScrollView alloc] initWithFrame:CGRectZero];
-        contentScrollView.backgroundColor = [UIColor clearColor];
-        contentScrollView.parent = self;
-        contentScrollView.delegate = self;
-        contentScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self addSubview:contentScrollView];
-        
-        contentTableView = [[UITableView alloc] initWithFrame:contentScrollView.bounds];
-        contentTableView.dataSource = self;
-        contentTableView.delegate = self;
-        contentTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        contentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        contentTableView.backgroundColor = [UIColor clearColor];
-        [contentScrollView addSubview:contentTableView];
-        
+        [self initConfig];
     }
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder*)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self initConfig];
+    }
+    return self;
+}
+
+- (void)initConfig
+{
+    self.layer.borderColor = [[UIColor colorWithWhite:XCMultiTableView_BoraerColorGray alpha:1.0f] CGColor];
+    self.layer.cornerRadius = XCMultiTableView_CornerRadius;
+    self.layer.borderWidth = XCMultiTableView_BorderWidth;
+    self.clipsToBounds = YES;
+    self.backgroundColor = [UIColor clearColor];
+    self.contentMode = UIViewContentModeRedraw;
+
+    self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+    cellWidth = XCMultiTableView_DefaultCellWidth;
+    cellHeight = XCMultiTableView_DefaultCellHeight;
+    topHeaderHeight = XCMultiTableView_DefaultTopHeaderHeight;
+    leftHeaderWidth = XCMultiTableView_DefaultLeftHeaderWidth;
+    sectionHeaderHeight = XCMultiTableView_DefaultSectionHeaderHeight;
+
+    boldSeperatorLineWidth = XCMultiTableView_DefaultBoldLineWidth;
+    normalSeperatorLineWidth = XCMultiTableView_DefaultNormalLineWidth;
+
+    boldSeperatorLineColor = [UIColor colorWithWhite:XCMultiTableView_DefaultLineGray alpha:1.0];
+    normalSeperatorLineColor = [UIColor colorWithWhite:XCMultiTableView_DefaultLineGray alpha:1.0];
+
+    vertexView = [[UIView alloc] initWithFrame:CGRectZero];
+    vertexView.backgroundColor = [UIColor clearColor];
+    vertexView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self addSubview:vertexView];
+
+    topHeaderScrollView = [[XCMultiTableViewBGScrollView alloc] initWithFrame:CGRectZero];
+    topHeaderScrollView.backgroundColor = [UIColor clearColor];
+    topHeaderScrollView.parent = self;
+    topHeaderScrollView.delegate = self;
+    topHeaderScrollView.showsHorizontalScrollIndicator = NO;
+    topHeaderScrollView.showsVerticalScrollIndicator = NO;
+    topHeaderScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self addSubview:topHeaderScrollView];
+
+    leftHeaderTableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    leftHeaderTableView.dataSource = self;
+    leftHeaderTableView.delegate = self;
+    leftHeaderTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    leftHeaderTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    leftHeaderTableView.backgroundColor = [UIColor clearColor];
+    [self addSubview:leftHeaderTableView];
+
+    contentScrollView = [[XCMultiTableViewBGScrollView alloc] initWithFrame:CGRectZero];
+    contentScrollView.backgroundColor = [UIColor clearColor];
+    contentScrollView.parent = self;
+    contentScrollView.delegate = self;
+    contentScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self addSubview:contentScrollView];
+
+    contentTableView = [[UITableView alloc] initWithFrame:contentScrollView.bounds];
+    contentTableView.dataSource = self;
+    contentTableView.delegate = self;
+    contentTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    contentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    contentTableView.backgroundColor = [UIColor clearColor];
+    [contentScrollView addSubview:contentTableView];
 }
 
 - (void)layoutSubviews {
