@@ -33,13 +33,28 @@ typedef NS_ENUM(NSUInteger, AlignHorizontalPosition) {
 @property (nonatomic, assign) CGFloat boldSeperatorLineWidth;
 @property (nonatomic, assign) CGFloat normalSeperatorLineWidth;
 
-@property (nonatomic, strong) UIColor *boldSeperatorLineColor;
-@property (nonatomic, strong) UIColor *normalSeperatorLineColor;
+@property (nonatomic, strong) UIColor* boldSeperatorLineColor;
+@property (nonatomic, strong) UIColor* normalSeperatorLineColor;
+
+@property (nonatomic, strong) UIColor* topHeaderBackgroundColor;
+@property (nonatomic, strong) UIFont* topHeaderFont;
+
+@property (nonatomic, strong) UIFont* leftHeaderFont;
+@property (nonatomic, strong) UIColor* leftHeaderTextColor;
+@property (nonatomic, strong) UIColor* leftHeaderOddRowColor;
+@property (nonatomic, strong) UIColor* leftHeaderEvenRowColor;
+
+@property (nonatomic, strong) UIFont* contentFont;
+@property (nonatomic, strong) UIColor* contentOddRowColor;
+@property (nonatomic, strong) UIColor* contentEvenRowColor;
+
+@property (nonatomic) CGFloat cellCornerRadius;
+
+@property (nonatomic) UIEdgeInsets cellPadding;
 
 @property (nonatomic, assign) BOOL leftHeaderEnable;
 
 @property (nonatomic, weak) id<XCMultiTableViewDataSource> datasource;
-
 
 - (void)reloadData;
 
@@ -48,17 +63,17 @@ typedef NS_ENUM(NSUInteger, AlignHorizontalPosition) {
 @protocol XCMultiTableViewDataSource <NSObject>
 
 @required
-- (NSArray *)arrayDataForTopHeaderInTableView:(XCMultiTableView *)tableView;
-- (NSArray *)arrayDataForLeftHeaderInTableView:(XCMultiTableView *)tableView InSection:(NSUInteger)section;
-- (NSArray *)arrayDataForContentInTableView:(XCMultiTableView *)tableView InSection:(NSUInteger)section;
+- (NSArray*)arrayDataForTopHeaderInTableView:(XCMultiTableView*)tableView;
+- (NSArray*)arrayDataForLeftHeaderInTableView:(XCMultiTableView*)tableView InSection:(NSUInteger)section;
+- (NSArray*)arrayDataForContentInTableView:(XCMultiTableView*)tableView InSection:(NSUInteger)section;
 
 @optional
-- (NSUInteger)numberOfSectionsInTableView:(XCMultiTableView *)tableView;
-- (CGFloat)tableView:(XCMultiTableView *)tableView contentTableCellWidth:(NSUInteger)column;
-- (CGFloat)tableView:(XCMultiTableView *)tableView cellHeightInRow:(NSUInteger)row InSection:(NSUInteger)section;
-- (CGFloat)topHeaderHeightInTableView:(XCMultiTableView *)tableView;
-- (UIColor *)tableView:(XCMultiTableView *)tableView bgColorInSection:(NSUInteger)section InRow:(NSUInteger)row InColumn:(NSUInteger)column;
-- (UIColor *)tableView:(XCMultiTableView *)tableView headerBgColorInColumn:(NSUInteger)column;
-- (AlignHorizontalPosition)tableView:(XCMultiTableView *)tableView inColumn:(NSInteger)column;
+- (NSUInteger)numberOfSectionsInTableView:(XCMultiTableView*)tableView;
+- (CGFloat)tableView:(XCMultiTableView*)tableView contentTableCellWidth:(NSUInteger)column;
+- (CGFloat)tableView:(XCMultiTableView*)tableView cellHeightInRow:(NSUInteger)row InSection:(NSUInteger)section;
+- (CGFloat)topHeaderHeightInTableView:(XCMultiTableView*)tableView;
+- (UIColor*)tableView:(XCMultiTableView*)tableView bgColorInSection:(NSUInteger)section InRow:(NSUInteger)row InColumn:(NSUInteger)column;
+- (UIColor*)tableView:(XCMultiTableView*)tableView headerBgColorInColumn:(NSUInteger)column;
+- (AlignHorizontalPosition)tableView:(XCMultiTableView*)tableView inColumn:(NSInteger)column;
 
 @end
