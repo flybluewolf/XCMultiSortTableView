@@ -46,6 +46,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     UITableView* leftHeaderTableView;
     UITableView* contentTableView;
     UIView* vertexView;
+    UILabel* vertexViewLabel;
 
     NSMutableDictionary* sectionFoldedStatus;
     NSArray* columnPointCollection;
@@ -119,6 +120,11 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     vertexView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:vertexView];
 
+    vertexViewLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    vertexViewLabel.backgroundColor = [UIColor clearColor];
+    vertexViewLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [vertexView addSubview:vertexViewLabel];
+
     topHeaderScrollView = [[XCMultiTableViewBGScrollView alloc] initWithFrame:CGRectZero];
     topHeaderScrollView.backgroundColor = [UIColor clearColor];
     topHeaderScrollView.parent = self;
@@ -161,7 +167,8 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     CGFloat superHeight = self.bounds.size.height;
 
     if (leftHeaderEnable) {
-        vertexView.frame = CGRectMake(0, 0, leftHeaderWidth, topHeaderHeight);
+        vertexView.frame = CGRectMake(self.cellPadding.left, self.cellPadding.top, leftHeaderWidth - self.cellPadding.left - self.cellPadding.right, topHeaderHeight - self.cellPadding.top - self.cellPadding.bottom);
+        vertexViewLabel.center = CGPointMake((leftHeaderWidth - self.cellPadding.left - self.cellPadding.right) / 2.f, (topHeaderHeight - self.cellPadding.top - self.cellPadding.bottom) / 2.f);
         topHeaderScrollView.frame = CGRectMake(leftHeaderWidth + boldSeperatorLineWidth, 0, superWidth - leftHeaderWidth - boldSeperatorLineWidth, topHeaderHeight);
         leftHeaderTableView.frame = CGRectMake(0, topHeaderHeight + boldSeperatorLineWidth, leftHeaderWidth, superHeight - topHeaderHeight - boldSeperatorLineWidth);
         contentScrollView.frame = CGRectMake(leftHeaderWidth + boldSeperatorLineWidth, topHeaderHeight + boldSeperatorLineWidth, superWidth - leftHeaderWidth - boldSeperatorLineWidth, superHeight - topHeaderHeight - boldSeperatorLineWidth);
@@ -375,7 +382,17 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 
     [self accessDataSourceData];
 
-    vertexView.backgroundColor = [self headerBgColorColumn:-1];
+    vertexViewLabel.backgroundColor = [UIColor clearColor];
+    vertexViewLabel.text = self.vertexViewTitle;
+    vertexViewLabel.textColor = self.vertexViewColor;
+    vertexViewLabel.font = self.vertexViewFont;
+    vertexViewLabel.textAlignment = NSTextAlignmentCenter;
+    [vertexViewLabel sizeToFit];
+
+    //vertexView.backgroundColor = [self headerBgColorColumn:-1];
+    vertexView.backgroundColor = self.vertexViewBackgroundColor;
+    vertexView.layer.cornerRadius = self.cellCornerRadius;
+
     [self accessColumnPointCollection];
     [self buildSectionFoledStatus:-1];
     [self setUpTopHeaderScrollView];
