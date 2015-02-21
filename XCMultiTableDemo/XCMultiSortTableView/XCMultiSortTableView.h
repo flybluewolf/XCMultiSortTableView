@@ -36,6 +36,11 @@ typedef NS_ENUM(NSUInteger, AlignHorizontalPosition) {
 @property (nonatomic, strong) UIColor* boldSeperatorLineColor;
 @property (nonatomic, strong) UIColor* normalSeperatorLineColor;
 
+@property (nonatomic, strong) NSString* vertexViewTitle;
+@property (nonatomic, strong) UIColor* vertexViewBackgroundColor;
+@property (nonatomic, strong) UIFont* vertexViewFont;
+@property (nonatomic, strong) UIColor* vertexViewColor;
+
 @property (nonatomic, strong) UIColor* topHeaderBackgroundColor;
 @property (nonatomic, strong) UIFont* topHeaderFont;
 
