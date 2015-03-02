@@ -413,7 +413,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
         }
     }
 
-    NSLog(@"width:%f, height:%f", self.frame.size.width, self.frame.size.height);
+    //NSLog(@"width:%f, height:%f", self.frame.size.width, self.frame.size.height);
 
     topHeaderScrollView.contentSize = CGSizeMake(width, topHeaderHeight);
     contentScrollView.contentSize = CGSizeMake(width, self.bounds.size.height - topHeaderHeight - boldSeperatorLineWidth);
