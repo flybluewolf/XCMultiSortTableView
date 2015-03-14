@@ -12,7 +12,7 @@
 #import "XCMultiSortTableViewBGScrollView.h"
 
 #import "UIView+XCMultiSortTableView.h"
-
+o
 #define AddHeightTo(v, h)   \
     {                       \
         CGRect f = v.frame; \
@@ -793,6 +793,9 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 
 - (NSUInteger)rowsInSection:(NSUInteger)section
 {
+    if (leftHeaderDataArray.count <= section)
+        return 0;
+
     return [[leftHeaderDataArray objectAtIndex:section] count];
 }
 
