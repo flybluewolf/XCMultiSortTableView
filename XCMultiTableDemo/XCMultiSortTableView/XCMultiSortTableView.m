@@ -12,7 +12,7 @@
 #import "XCMultiSortTableViewBGScrollView.h"
 
 #import "UIView+XCMultiSortTableView.h"
-o
+
 #define AddHeightTo(v, h)   \
     {                       \
         CGRect f = v.frame; \
