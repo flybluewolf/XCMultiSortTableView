@@ -122,6 +122,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 
     vertexViewLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     vertexViewLabel.backgroundColor = [UIColor clearColor];
+    vertexViewLabel.textAlignment = NSTextAlignmentCenter;
     vertexViewLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [vertexView addSubview:vertexViewLabel];
 
@@ -168,7 +169,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 
     if (leftHeaderEnable) {
         vertexView.frame = CGRectMake(self.cellPadding.left, self.cellPadding.top, leftHeaderWidth - self.cellPadding.left - self.cellPadding.right, topHeaderHeight - self.cellPadding.top - self.cellPadding.bottom);
-        vertexViewLabel.center = CGPointMake((leftHeaderWidth - self.cellPadding.left - self.cellPadding.right) / 2.f, (topHeaderHeight - self.cellPadding.top - self.cellPadding.bottom) / 2.f);
+        //vertexViewLabel.center = CGPointMake((leftHeaderWidth - self.cellPadding.left - self.cellPadding.right) / 2.f, (topHeaderHeight - self.cellPadding.top - self.cellPadding.bottom) / 2.f);
         topHeaderScrollView.frame = CGRectMake(leftHeaderWidth + boldSeperatorLineWidth, 0, superWidth - leftHeaderWidth - boldSeperatorLineWidth, topHeaderHeight);
         leftHeaderTableView.frame = CGRectMake(0, topHeaderHeight + boldSeperatorLineWidth, leftHeaderWidth, superHeight - topHeaderHeight - boldSeperatorLineWidth);
         contentScrollView.frame = CGRectMake(leftHeaderWidth + boldSeperatorLineWidth, topHeaderHeight + boldSeperatorLineWidth, superWidth - leftHeaderWidth - boldSeperatorLineWidth, superHeight - topHeaderHeight - boldSeperatorLineWidth);
@@ -463,6 +464,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
         label.font = self.topHeaderFont;
         label.text = [[datasource arrayDataForTopHeaderInTableView:self] objectAtIndex:i];
         label.textColor = [UIColor whiteColor];
+        label.preferredMaxLayoutWidth = view.frame.size.width - self.cellPadding.left - self.cellPadding.right;
         [label sizeToFit];
 
         AlignHorizontalPosition alignPosition = AlignHorizontalPositionLeft;
@@ -558,8 +560,15 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     label.text = [[leftHeaderDataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     label.font = self.leftHeaderFont;
     label.textColor = self.leftHeaderTextColor;
+    label.textAlignment = NSTextAlignmentLeft;
+    label.preferredMaxLayoutWidth = view.frame.size.width - self.cellPadding.left * 2 - self.cellPadding.right;
     [label sizeToFit];
-    label.center = CGPointMake(leftHeaderWidth / 2.0f, cellH / 2.0f);
+    CGRect frame = label.frame;
+    frame.origin.x = self.cellPadding.left * 2;
+    frame.origin.y = (cellH - frame.size.height) / 2.f;
+    frame.size.width = view.frame.size.width - self.cellPadding.left * 2 - self.cellPadding.right;
+    label.frame = frame;
+    //label.center = CGPointMake(leftHeaderWidth / 2.0f, cellH / 2.0f);
 
     UIColor* color = [self bgColorInSection:indexPath.section InRow:indexPath.row InColumn:-1];
     view.backgroundColor = color;
@@ -611,6 +620,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.text = [NSString stringWithFormat:@"%@", [ary objectAtIndex:i]];
         label.font = self.contentFont;
+        label.preferredMaxLayoutWidth = view.frame.size.width - self.cellPadding.left - self.cellPadding.right;
         [label sizeToFit];
 
         AlignHorizontalPosition alignPosition = AlignHorizontalPositionLeft;
