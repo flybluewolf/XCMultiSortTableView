@@ -142,6 +142,12 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     leftHeaderTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     leftHeaderTableView.showsVerticalScrollIndicator = NO;
     leftHeaderTableView.backgroundColor = [UIColor clearColor];
+    leftHeaderTableView.separatorInset = UIEdgeInsetsMake(
+                                                          leftHeaderTableView.separatorInset.top,
+                                                          [[UIScreen mainScreen] bounds].size.width,
+                                                          leftHeaderTableView.separatorInset.bottom,
+                                                          leftHeaderTableView.separatorInset.right
+                                                          );
     [self addSubview:leftHeaderTableView];
 
     contentScrollView = [[XCMultiTableViewBGScrollView alloc] initWithFrame:CGRectZero];
@@ -157,6 +163,12 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     contentTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     contentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     contentTableView.backgroundColor = [UIColor clearColor];
+    contentTableView.separatorInset = UIEdgeInsetsMake(
+                                                          contentTableView.separatorInset.top,
+                                                          [[UIScreen mainScreen] bounds].size.width,
+                                                          contentTableView.separatorInset.bottom,
+                                                          contentTableView.separatorInset.right
+                                                          );
     [contentScrollView addSubview:contentTableView];
 }
 
