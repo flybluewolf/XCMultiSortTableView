@@ -61,6 +61,8 @@ typedef NS_ENUM(NSUInteger, AlignHorizontalPosition) {
 
 @property (nonatomic, weak) id<XCMultiTableViewDataSource> datasource;
 
+@property(nonatomic, assign) BOOL enableSorted;
+
 - (void)reloadData;
 
 @end
