@@ -711,6 +711,8 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 
 - (void)contentHeaderTap:(UITapGestureRecognizer*)recognizer
 {
+    if (!self.enableSorted) return;
+
     UIView* view = recognizer.view;
 
     NSIndexPath* indexPath = [self accessUIViewVirtualTag:view];
