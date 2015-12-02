@@ -12,6 +12,7 @@
 #import "XCMultiSortTableViewBGScrollView.h"
 
 #import "UIView+XCMultiSortTableView.h"
+#import "MarqueeLabel.h"
 
 #define AddHeightTo(v, h)   \
     {                       \
@@ -568,7 +569,8 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, leftHeaderWidth, cellH)];
     view.clipsToBounds = YES;
 
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    //UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    MarqueeLabel *label = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:8.0 andFadeLength:10.0f];
     label.text = [[leftHeaderDataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     label.font = self.leftHeaderFont;
     label.textColor = self.leftHeaderTextColor;
