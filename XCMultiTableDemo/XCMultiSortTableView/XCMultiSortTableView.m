@@ -571,6 +571,8 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 
     //UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
     MarqueeLabel *label = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:8.0 andFadeLength:10.0f];
+    label.tapToScroll = YES;
+    label.rate = 30;
     label.text = [[leftHeaderDataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     label.font = self.leftHeaderFont;
     label.textColor = self.leftHeaderTextColor;
